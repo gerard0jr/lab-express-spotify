@@ -21,10 +21,10 @@ spotifyApi.clientCredentialsGrant()
 router.get('/', (req,res) => {
     const {search} = req.query
     if(search){
-        spotifyApi.searchArtists(search, {limit: 2})
+        spotifyApi.searchArtists(search)
         .then( data => {
-            console.log(data)
-           // -res.render('artists',data)
+        let artists = data.body.artists.items
+        res.render('artists',{artists})
         })
         .catch( error => {
             console.log(error)
@@ -33,6 +33,18 @@ router.get('/', (req,res) => {
     } else{
         res.render('home')
     }
+})
+
+router.get('/albums/:id', (req,res) => {
+    const {id} = req.params
+    spotifyApi.getArtistAlbums(id)
+    .then( data => {
+        let albums = data.body.items
+        res.render('albums',{albums})
+    })
+    .catch( e => {
+        res.send(e)
+    })
 })
 
 module.exports = router
