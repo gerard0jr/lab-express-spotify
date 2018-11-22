@@ -29,9 +29,6 @@ spotifyApi.clientCredentialsGrant()
     console.log('Something went wrong when retrieving an access token', err);
 });
 
-// app.get('/',(req,res)=>{
-//     res.send('Ironhack Spotify')
-// })
 
 app.listen(3000, () => {
     console.log('Listening on port 3000!')
