@@ -47,4 +47,16 @@ router.get('/albums/:id', (req,res) => {
     })
 })
 
+router.get('/tracks/:id', (req,res) => {
+    const {id} = req.params
+    spotifyApi.getAlbumTracks(id)
+    .then( data => {
+        let tracks = data.body.items
+        console.log(tracks[0])
+        res.render('tracks',{tracks})
+    })
+    .catch( e => {
+        res.send(e)
+    })
+})
 module.exports = router
